@@ -24,6 +24,8 @@ resource "azurerm_network_interface" "test-nic" {
   location            = "${azurerm_resource_group.test-rg.location}"
   resource_group_name = "${azurerm_resource_group.test-rg.name}"
 
+  network_security_group_id = "${azurerm_network_security_group.test-nsg.id}"
+
   ip_configuration {
     name                          = "test-config"
     subnet_id                     = "${azurerm_subnet.internal.id}"
