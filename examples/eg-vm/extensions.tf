@@ -1,4 +1,5 @@
 resource "azurerm_virtual_machine_extension" "test-vmext-VMAccessAgent" {
+  count                = 0
   name                 = "test-vmext-VMAccessAgent"
   location             = "${azurerm_resource_group.test-rg.location}"
   resource_group_name  = "${azurerm_resource_group.test-rg.name}"
