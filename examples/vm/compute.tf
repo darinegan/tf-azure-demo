@@ -1,3 +1,8 @@
+data "azurerm_image" "test-image" {
+  name                = "${var.image_name}"
+  resource_group_name = "${var.image_resource_group_name}"
+}
+
 resource "azurerm_virtual_machine" "test-vm" {
   name                  = "test-vm"
   location              = "${azurerm_resource_group.test-rg.location}"
@@ -8,10 +13,12 @@ resource "azurerm_virtual_machine" "test-vm" {
   delete_os_disk_on_termination = true
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    id = "${data.azurerm_image.test-image.id}"
+
+    # publisher = "MicrosoftWindowsServer"
+    # offer     = "WindowsServer"
+    # sku       = "2016-Datacenter"
+    # version   = "latest"
   }
 
   storage_os_disk {
